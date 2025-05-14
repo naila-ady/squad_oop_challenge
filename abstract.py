@@ -72,9 +72,9 @@ class Clothing(Product):
         self.material = material
 
     def __str__(self):
-        return (f"[Clothing] \n Name:{self._name} \n ID: {self._product_id}\n Price: ${self._price} "
-                f"\n Size: {self.size},\n Material: {self.material}, "
-                f" \nIn Stock: {self._quantity_in_stock}")
+        return (f"[Clothing] Name:{self._name}  ID: {self._product_id} Price: ${self._price} "
+                f"Size: {self.size}, Material: {self.material}, "
+                f" In Stock: {self._quantity_in_stock}")
 
 # ---------------------- INVENTORY CLASS ----------------------
 class Inventory:
