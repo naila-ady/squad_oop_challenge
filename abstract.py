@@ -31,6 +31,9 @@ class Product(ABC):
 
     def get_total_value(self):
         return self._price * self._quantity_in_stock
+    def get_total_value1(self):
+        return  self._quantity_in_stock
+
 
     @abstractmethod
     def __str__(self):
@@ -69,9 +72,9 @@ class Clothing(Product):
         self.material = material
 
     def __str__(self):
-        return (f"[Clothing] {self._name} (ID: {self._product_id}) - "
-                f"Size: {self.size}, Material: {self.material}, "
-                f"Price: ${self._price}, In Stock: {self._quantity_in_stock}")
+        return (f"[Clothing] \n Name:{self._name} \n ID: {self._product_id}\n Price: ${self._price} "
+                f"\n Size: {self.size},\n Material: {self.material}, "
+                f" \nIn Stock: {self._quantity_in_stock}")
 
 # ---------------------- INVENTORY CLASS ----------------------
 class Inventory:
@@ -117,6 +120,13 @@ class Inventory:
         for product in self._products.values():
             total += product.get_total_value()
         return total
+    
+    def total_inventory_value1(self):
+        total1 = 0
+        for product in self._products.values():
+            total1 += product.get_total_value1()
+        return total1
+
 
     def remove_expired_products(self):
         removed_list = []
@@ -126,13 +136,32 @@ class Inventory:
 
         for product_id in removed_list:
             del self._products[product_id]
+#creating instance of Inventory
 inventory =Inventory()
 e1 = Electronics("E101", "Smartphone", 50000, 10, 2, "Samsung")
+e2 =Electronics ("E102","Tablets",5000, 50,8,"Iphone")
 g1 = Grocery("G101", "Milk", 150, 20, date(2024, 12, 31))
 c1 = Clothing("C101", "T-Shirt", 1200, 50, "M", "Cotton")
 inventory.add_product(e1)
+inventory.add_product(e2)
 inventory.add_product(g1)
 inventory.add_product(c1)
+print("Total Inventory Value:", inventory.total_inventory_value())
+
 results = inventory.search_by_name("milk")
 for p in results:
     print(p)
+result1=inventory.search_by_type(Electronics)
+for r in result1:
+    print(r)
+results_by_type = inventory.search_by_type(Clothing)
+for g in results_by_type:
+    print(g)
+
+inventory.sell_product("G101", 5)#selling the product
+inventory.restock_product("C101", 10)#restocking the inventory
+inventory.remove_product("E102")#removing the whole product from list
+inventory.remove_expired_products()#removing only expired products
+print("Total Inventory Value:", inventory.total_inventory_value())#checking how much inventory left
+print("Total Inventory Value1:", inventory.total_inventory_value1())#checking how much inventory left
+
