@@ -1,0 +1,11 @@
+[
+    {
+        "type": "Clothing",
+        "product_id": "201",
+        "name": "tshirt",
+        "price": 600.0,
+        "quantity": 60,
+        "size": "m",
+        "material": "cotton"
+    }
+]
